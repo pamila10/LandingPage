@@ -1,0 +1,23 @@
+.users {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  margin-bottom: 50px;
+
+  &_wrap {
+    display: flex;
+    flex-wrap: wrap;
+
+    span {
+      padding-right: 10px;
+    }
+  }
+  
+  &_bl {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
