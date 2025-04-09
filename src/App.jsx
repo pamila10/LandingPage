@@ -8,13 +8,16 @@ function App() {
   const [users, setUsers] = useState([])
 
   useEffect(() => {
-    try {
-      api.get(`users?_limit=${10}`).then((data) => {
-        setUsers(data?.data)
-      })
-    } catch (err) {
-      console.log(`Error: ${err.message}`)
+    const fetchData = async () =>{
+      try {
+        const response = await api.get(`users?_limit=${10}`)
+        setUsers(response.data)
+      } catch (err) {
+        console.error(`Error: ${err.message}`)
+      }
     }
+
+    fetchData()
   }, [])
 
   return (
