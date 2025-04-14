@@ -6,9 +6,10 @@ import UsersSection from './components/UsersSection'
 function App() {
 
   const [users, setUsers] = useState([])
+  const [ratio, setRatio] = useState('1')
 
   useEffect(() => {
-    const fetchData = async () =>{
+    const fetchData = async () => {
       try {
         const response = await api.get(`users?_limit=${10}`)
         setUsers(response.data)
@@ -18,24 +19,31 @@ function App() {
     }
 
     fetchData()
+
+    const calcRatio = () => {
+      setRatio(`1 / ${window.innerHeight / window.innerWidth}`)
+
+      window.addEventListener('resize', calcRatio)
+
+      return () => {
+        window.removeEventListener('resize', calcRatio)
+      }
+    }
+    
+    calcRatio()
+
   }, [])
 
   return (
-    <div className='container'>
-      <header className='header'>
-
-      </header>
+    <div className='container' style={{aspectRatio: ratio}}>
+      <header className='header'></header>
 
       <main className='main'>
         <UsersSection users={users}/>
-        <aside className='aside'>
-
-        </aside>
+        <aside className='aside'></aside>
       </main>
 
-      <footer className='footer'>
-
-      </footer>
+      <footer className='footer'></footer>
     </div>
   )
 }
